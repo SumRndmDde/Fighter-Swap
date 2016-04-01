@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+	<script>
+		if(localStorage.visits)
+		{
+			localStorage.setItem("visits", Number(localStorage.getItem("visits")) + 1);
+		}
+		else
+		{
+			localStorage.setItem("visits", Number(1));
+		}
+	</script>
+
+	<script>
+		//Create an object an set each variable
+		//to be the name of each fighter.
+		//Asign each variable with an array that
+		//contains the necessary values for caluclating
+		//the stats.
+		var fightersAndShit = {
+			//Fighter Name: [ISVs(0-2), Growth Rates (3-5), BMVs(6-8), Name, Mastery]
+			SimaYi: [32, 26, 30, 1.75, 1.4, 1.75, 8, 18, 11, 'Sima Yi', 'Fire'],
+			Toadmeister: [29, 37, 22, 1.65, 1.85, 1.45, 11, 9, 15, 'Toadmeister', 'Wind'],
+			Chrome: [33, 19, 36, 1.7, 1.3, 1.8, 13, 16, 8, 'Chrome', 'Earth'],
+			Merv: [30, 35, 20, 1.6, 1.9, 1.4, 11, 8, 20, 'Merv', 'Cursed Seal Jutsu'],
+			Freya: [24, 32, 32, 1.35, 1.75, 1.75, 19, 11, 8, 'Freya', 'Healing'],
+			EvilGuanYu: [33, 29, 26, 1.8, 1.7, 1.4, 8, 12, 17, 'Evil Guan Yu', 'Taijutsu'],
+			Jupiter: [35, 30, 23, 1.75, 1.75, 1.4, 8, 12, 18, 'Jupiter', 'Thunder'],
+			Llamar: [25, 35, 28, 1.45, 1.85, 1.65, 18, 8, 11, 'Llamar', 'Genjutsu'],
+			Muramasa: [34, 30, 26, 1.85, 1.65, 1.5, 9, 11, 16, 'Muramasa', 'Genjutsu'],
+			Void: [37, 21, 30, 1.85, 1.4, 1.65, 8, 17, 12, 'Void', 'Genjutsu'],
+			Altira: [30, 40, 20, 1.6, 1.9, 1.5, 11, 8, 21, 'Altira', 'Genjutsu'],
+			Shifter: [36, 27, 27, 1.9, 1.4, 1.7, 9, 16, 10, 'Shifter', 'Water'],
+			PirateDL: [27, 27, 36, 1.55, 1.55, 1.9, 14, 14, 8, 'Pirate D. L', 'Cursed Seal Jutsu'],
+			Fleshy: [38, 25, 25, 1.8, 1.45, 1.65, 8, 15, 13, 'Fleshy', 'Genjutsu'],
+			Wanderer: [30, 38, 23, 1.5, 1.9, 1.6, 17, 8, 12, 'Wanderer', 'Thunder'],
+			Shinigami: [32, 22, 36, 1.7, 1.4, 1.9, 12, 17, 8, 'Shinigami', 'Cursed Seal Jutsu'],
+			MetalX: [36, 25, 29, 1.8, 1.5, 1.7, 9, 15, 10, 'MetalX', 'Wind'],
+			Sif: [30, 26, 34, 1.65, 1.5, 1.85, 10, 17, 9, 'Sif', 'Taijutsu'],
+			Thor: [30, 35, 25, 1.5, 1.7, 1.8, 17, 12, 8, 'Thor', 'Thunder'],
+			ZhaoYun: [30, 38, 23, 1.6, 1.9, 1.5, 12, 8, 18, 'Zhao Yun', 'Thunder'],
+			Hel: [30, 34, 26, 1.65, 1.85, 1.5, 10, 9, 17, 'Hel', 'Fire'],
+			EvilIvbu: [36, 18, 36, 1.8, 1.4, 1.8, 9, 24, 9, 'Evil Ivbu', 'Fire'],
+			Stryker: [36, 22, 32, 1.9, 1.4, 1.7, 8, 18, 11, 'Stryker', 'Genjutsu'],
+			Susanoo: [22, 32, 36, 1.35, 1.8, 1.85, 17, 8, 11, 'Susanoo', 'Earth'],
+			Erza: [36, 25, 29, 1.8, 1.5, 1.7, 9, 14, 10, 'Erza', 'Genjutsu'],
+			Beauty: [18, 36, 36, 1.4, 1.8, 1.8, 24, 9, 9, 'Beauty', 'Water'],
+			Cloud: [33, 20, 37, 1.75, 1.2, 1.95, 11, 19, 8, 'Cloud', 'Healing'],
+			DeathKnight: [30, 35, 25, 1.6, 1.9, 1.5, 11, 9, 14, 'Death Knight', 'Water'],
+			Pumpkin: [30, 8, 23, 1.5, 1.9, 1.6, 17, 8, 12, 'Pumpkin', 'Genjutsu'],
+			Nami: [36, 30, 24, 1.9, 1.7, 1.4, 9, 10, 16, 'Nami', 'Thunder'],
+			Chopper: [36, 32, 26, 1.8, 1.75, 1.4, 9, 11, 17, 'Chopper', 'Thunder'],
+			IronMan: [32, 22, 36, 1.7, 1.4, 1.9, 11, 18, 8, 'Iron Man', 'Cursed Seal Jutsu'],
+			Kellyn: [35, 30, 23, 1.75, 1.75, 1.4, 8, 12, 18, 'Kellyn', 'Thunder'],
+			DevilHunter: [37, 21, 30, 1.85, 1.4, 1.65, 8, 17, 12, 'Devil Hunter', 'Genjutsu'],
+			Rugalz: [30, 38, 22, 1.6, 1.9, 1.5, 11, 8, 17, 'Rugalz', 'Thunder']
+			//Fuuuuuuuuucking DONE!!!!!
+		};
+
+		//Function called for when it's time to swap fighters 
+		function getValues2() {
+
+			document.getElementById('Results3').innerHTML = "<br>APRIL FOOLS!<br><br>lolololololol<br><br>You have fallen for this " + localStorage.visits + " times!<br><br>WHAT A WAMP!<br><br>lolololololololol<br><br>";
+		}
+
+	</script>
+
+	<head>
+		<title>CF Fighter Calculator</title>
+		<link rel="stylesheet" href="desktop.css" media="screen" />
+		<link rel="stylesheet" href="mobile.css" media="only screen and (max-device width:480px)"/>
+		<meta name="viewport" content="width=320,user-scalable=false" />
+	</head>
+
+	<body>
+
+		<p>
+			<img src="SumRndmDdeLogo3.png" alt="SumRndmDde" width = 400px height = auto>
+		</p>
+
+		<h1>Chaos Fighters<br>Fighter Calculator</h1>
+		<h1>Version: 1.00</h1>
+		<p style="background-color:white;">
+			<br>
+			Hello!
+			<br>
+			Welcome to a Chaos Fighters calculator!
+			<br>
+			<br>
+			The following calculator will give the stats a certain
+			fighter will wield at a certain level and see what
+			their affects would be on your direct stats.
+			<br>
+			<br>
+			You can also use it to compare the stat changes that will
+			occur from switching from one legendary to another, or compare
+			and contrast the benefits of current legendaries.
+			<br>
+			<br>
+			Please enjoy!
+			<br>
+			<br>
+			- <a href="http://line.me/ti/p/WYKiDc_5lQ">SumRndmDde (Robert)</a>
+			<br>
+			<br>
+			<br>
+			Wanna Support Me?<br>
+			Buy my LINE Sticker Pack!<br>
+			<a href="http://line.me/S/sticker/1251518">Random Face Dude Stickers</a><br>
+			<br>
+		</p>
+
+		<p>
+			<img src="SumRndmDdeLogo3.png" alt="SumRndmDde" width = 400px height = auto>
+		</p>
+
+		<p style="background-color:#D692FF;">
+			<br>
+			<font size="5" style="text-decoration: underline">Current Fighter Info:</font>
+			<br>
+			<br>
+			Fighter:
+			<br>
+			<select id="Presets" onchange='getValues2()'>
+				<option value="SimaYi" selected>Sima Yi</option>
+				<option value="Toadmeister">Toadmeister</option>
+				<option value="Chrome">Chrome</option>
+				<option value="Merv">Merv</option>
+				<option value="Freya">Freya</option>
+				<option value="EvilGuanYu">Evil Guan Yu</option>
+				<option value="Jupiter">Jupiter</option>
+				<option value="Llamar">Llamar</option>
+				<option value="Muramasa">Muramasa</option>
+				<option value="Void">Void</option>
+				<option value="Altira">Altira</option>
+				<option value="Shifter">Shifter</option>
+				<option value="PirateDL">Pirate D. L</option>
+				<option value="Fleshy">Fleshy</option>
+				<option value="Wanderer">Wanderer</option>
+				<option value="Shinigami">Shinigami</option>
+				<option value="MetalX">MetalX</option>
+				<option value="Sif">Sif</option>
+				<option value="Thor">Thor</option>
+				<option value="ZhaoYun">Zhao Yun</option>
+				<option value="Hel">Hel</option>
+				<option value="EvilIvbu">Evil Ivbu</option>
+				<option value="Stryker">Stryker</option>
+				<option value="Susanoo">Susanoo</option>
+				<option value="Erza">Erza</option>
+				<option value="Beauty">Beauty</option>
+				<option value="Cloud">Cloud</option>
+				<option value="DeathKnight">Death Knight</option>
+				<option value="Pumpkin">Pumpkin</option>
+				<option value="Nami">Nami</option>
+				<option value="Chopper">Chopper</option>
+				<option value="IronMan">Iron Man</option>
+				<option value="Kellyn">Kellyn</option>
+				<option value="DevilHunter">Devil Hunter</option>
+				<option value="Rugalz">Rugalz</option>
+			</select>
+			<br>
+			<br>
+			Fighter's Level (0-34):
+			<br>
+			<input type="tel"  id="level" name="level" value="27"><br>
+			<br>
+		</p>
+
+
+		<p style="background-color:#92C5FF;">
+			<br>
+			<font size="5" style="text-decoration: underline">New Fighter Info:</font>
+			<br>
+			<br>
+			Fighter:
+			<br>
+			<select id="Presets2" onchange='getValues2()'>
+				<option value="SimaYi">Sima Yi</option>
+				<option value="Toadmeister" selected>Toadmeister</option>
+				<option value="Chrome">Chrome</option>
+				<option value="Merv">Merv</option>
+				<option value="Freya">Freya</option>
+				<option value="EvilGuanYu">Evil Guan Yu</option>
+				<option value="Jupiter">Jupiter</option>
+				<option value="Llamar">Llamar</option>
+				<option value="Muramasa">Muramasa</option>
+				<option value="Void">Void</option>
+				<option value="Altira">Altira</option>
+				<option value="Shifter">Shifter</option>
+				<option value="PirateDL">Pirate D. L</option>
+				<option value="Fleshy">Fleshy</option>
+				<option value="Wanderer">Wanderer</option>
+				<option value="Shinigami">Shinigami</option>
+				<option value="MetalX">MetalX</option>
+				<option value="Sif">Sif</option>
+				<option value="Thor">Thor</option>
+				<option value="ZhaoYun">Zhao Yun</option>
+				<option value="Hel">Hel</option>
+				<option value="EvilIvbu">Evil Ivbu</option>
+				<option value="Stryker">Stryker</option>
+				<option value="Susanoo">Susanoo</option>
+				<option value="Erza">Erza</option>
+				<option value="Beauty">Beauty</option>
+				<option value="Cloud">Cloud</option>
+				<option value="DeathKnight">Death Knight</option>
+				<option value="Pumpkin">Pumpkin</option>
+				<option value="Nami">Nami</option>
+				<option value="Chopper">Chopper</option>
+				<option value="IronMan">Iron Man</option>
+				<option value="Kellyn">Kellyn</option>
+				<option value="DevilHunter">Devil Hunter</option>
+				<option value="Rugalz">Rugalz</option>
+			</select>
+			<br>
+			<br>
+			New Fighter's Level (0-34):
+			<br>
+			<input type="tel"  id="level2" name="level2" value="27"><br>
+			<br>
+		</p>
+
+		<p style="background-color:#EEFF92;">
+			<br>
+			<font size="5" style="text-decoration: underline">Current Stats:</font>
+			<br>
+			<br>
+			STR:
+			<br>
+			<input type="tel"  id="current_str" name="current_str" value="1000"><br>
+			<br>
+			DEX:
+			<br>
+			<input type="tel"  id="current_dex" name="current_dex" value="1000"><br>
+			<br>
+			STA:
+			<br>
+			<input type="tel"  id="current_sta" name="current_sta" value="1000"><br>
+			<br>
+			Base MIN ATK (Optional):
+			<br>
+			<input type="tel"  id="base_min" name="base_min" value=""><br>
+			<br>
+			Base MAX ATK (Optional):
+			<br>
+			<input type="tel" id="base_max" name="base_max" value=""><br>
+			<br>
+			Base HP (Optional):
+			<br>
+			<input type="tel" id="base_hp" name="base_hp" value=""><br>
+			<br>
+			<br>
+			Input Base ATK and/or Base HP to get exactly how much ATK/HP will be gained/lost.<br>
+			Unsure what your Base ATK or Base HP is? 
+			Use the <a href='http://SumRndmDde.github.io/Base-Percent'>Base and Percent Calculator</a> to find out!
+			<br>
+			<br>
+		</p>
+
+		<p id="Results3" style="background-color:white;">
+			<br>
+			<button type="button" onclick="getValues2()">Find Stat Changes</button>
+			<br>
+			<br>
+		</p>
+		<br>
+		<p>
+			<img src="SumRndmDdeLogo3.png" alt="SumRndmDde" width = 400px height = auto>
+		</p>
+		<br>
+		<br>
+		<p style="font-family:terminal;background-color:#6BFF98;">
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version 1.00]</font><br>
+			Official Release Version<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.42]</font><br>
+			X-Fighting Fighters added<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.41]</font><br>
+			Made Custom Fighters get saved<br>
+			Changed Custom defaults to Ainu and Jessi<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.40]</font><br>
+			Added Custom Fighters<br>
+			Will still get complaints about lack of Jessi though T-T<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.31]</font><br>
+			Seperated Base ATK into MIN and MAX<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.30]</font><br>
+			Added input for Base stats<br>
+			Added ability to view direct stats<br>
+			Made Toadmeister default<br>
+			Linked to playlist<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.21]</font><br>
+			Added plus sign to positive changes<br>
+			Added link to Base/Percent Calculator<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.20]</font><br>
+			Added button to copy previous level<br>
+			Added link to video :p<br>
+			Fixed error which gave reverse results<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.10]</font><br>
+			Added the ability to view multiple fighters<br>
+			Can now compare stats<br>
+			Can now see what stat gains will occur when switching<br>
+			Fixed TAB label<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.01]</font><br>
+			Data Loads Automatically<br>
+ 			Freya Fixed<br>
+ 			+0 and +34 Fixed<br>
+			<br>
+			<font size="3" style='text-decoration: underline'>[Version Beta 1.00]</font><br>
+ 			Calculator Created!<br>
+ 			<br>
+		</p>
+
+		<p>
+			<br>
+			<br>
+			<br>
+			Found an error?<br>
+			Wish to request something?<br>
+			My LINE ID is 'SumRndmDde'<br>
+		</p>
+		
+	</body>
+</html>
